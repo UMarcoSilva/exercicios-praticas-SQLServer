@@ -1,0 +1,101 @@
+/*Colunas:
+CPF;
+Nome completo;
+Endereço completo;
+Data de nascimento;
+Idade;
+Sexo;
+Limite de crédito;
+Volume mínimo de compra de produto;
+Se já realizou alguma compra na empresa.*/
+
+CREATE TABLE [TABELA DE CLIENTES](
+	[CPF] [CHAR] (11),
+	[NOME] [VARCHAR] (150),
+	[RUA] [VARCHAR] (150),
+	[COMPLEMENTO] [VARCHAR] (150),
+	[BAIRRO] [VARCHAR] (150),
+	[ESTADO] [CHAR] (2),
+	[CEP] [CHAR] (8),
+	[DATA DE NASCIMENTO] [DATE],
+	[IDADE] [SMALLINT],
+	[SEXO] [CHAR] (1),
+	[LIMITE DE CREDITO] [MONEY],
+	[VOLUME MINIMO] [FLOAT],
+	[PRIMEIRA COMPRA] [BIT]
+);
+
+CREATE TABLE [TABELA DE PRODUTOS](
+[CODIGO DO PRODUTO] [VARCHAR] (20) NOT NULL PRIMARY KEY,
+[NOME DO PRODUTO] [VARCHAR] (50),
+[EMBALAGEM] [VARCHAR] (50),
+[TAMANHO] [VARCHAR] (50),
+[SABOR] [VARCHAR] (50),
+[PRECO DA LISTA] [SMALLMONEY] 
+);
+
+ALTER TABLE [TABELA DE CLIENTES] ALTER COLUMN [CPF] [CHAR] (11) NOT NULL;
+ALTER TABLE [TABELA DE CLIENTES] ADD CONSTRAINT PK_TABELA_CLIENTES
+PRIMARY KEY CLUSTERED ([CPF]);
+
+CREATE TABLE [TABELA DE VENDEDORES] (
+[MATRICULA] [CHAR] (5) NOT NULL PRIMARY KEY,
+[NOME] [VARCHAR] (100),
+[PERCENTUAL COMISSAO] [FLOAT]
+);
+
+/* Novo suco:
+1040107
+Light 350 ml - Melancia
+Lata
+350 ml
+Melancia
+R$ 4,56*/
+
+INSERT INTO [TABELA DE PRODUTOS] VALUES (
+'1040107',
+'Light 350 ml - Melancia',
+'Lata',
+'350 ml',
+'Melancia',
+4.56
+);
+
+INSERT INTO [TABELA DE PRODUTOS] VALUES
+('1037797', 'Clean 2 Litros Laranja', 'PET', '2 Litros', 'Laranja', 16.01),
+('1000889', 'Sabor da Montanha 700 ml Uva', 'Garrafa', '700 ml', 'Uva', 6.31),
+('1004327', 'Videira do Campo - 1,5 Litros Melancia', 'PET', '1,5 Litros', 'Melancia', 19.51),
+('1088126', 'Linha Citrus 1 Litro Limão', 'PET', '1 Litro', 'Limão', 7.00);
+
+INSERT INTO [TABELA DE CLIENTES] VALUES
+('00384393431', 'João da Silva', 'Rua Projetada A', 'Número 233', 'Copacabana', 'RJ', '20000000', '1965-03-21', 57, 'M', 20000000, 3000.30, 1),
+('00384393555', 'Maria Clara', 'Rua Projetada A', 'Número 233', 'Copacabana', 'RJ', '20000000', '1975-03-21',47, 'F', 200000, 3000.30, 0);
+
+//[MATRICULA] [CHAR] (5) NOT NULL PRIMARY KEY,
+//[NOME] [VARCHAR] (100),
+//[PERCENTUAL COMISSAO] [FLOAT]
+
+INSERT INTO [TABELA DE VENDEDORES] VALUES 
+('12345', 'Marcio', 15.2),
+('54321', 'Moacir', 0.5);
+
+ALTER TABLE [TABELA DE VENDEDORES] 
+WHERE MATRICULA 
+
+SELECT * FROM  [TABELA DE VENDEDORES]
+WHERE  MATRICULA = 12345;
+
+
+SELECT [MATRICULA] AS [IDENTIFICADOR], [NOME] AS [NOME DO VENDEDOR] FROM [TABELA DE VENDEDORES];
+
+INSERT INTO [TABELA DE CLIENTES] VALUES
+('00384393431', 'João da Silva', 'Rua Projetada A', 'Número 233', 'Tijuca', 'RJ', '20000000', '1965-03-21', 57, 'M', 20000000, 3000.30, 1);
+
+
+SELECT [NOME], [BAIRRO]
+FROM [TABELA DE CLIENTES]
+WHERE [BAIRRO] = 'Copacabana' OR [BAIRRO] = 'Tijuca';
+
+SELECT [NOME], [ESTADO], [PRIMEIRA COMPRA]
+FROM [TABELA DE CLIENTES]
+WHERE [PRIMEIRA COMPRA] = 1 AND [ESTADO] = 'RJ';
